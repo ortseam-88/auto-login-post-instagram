@@ -4,30 +4,47 @@ Program portable untuk login dan memposting foto, carousel, atau Reel melalui
 composer web Instagram. Paket ini disiapkan **tanpa akun, konten, media,
 session login, maupun riwayat publikasi**.
 
+---
+
+### 🚀 Download Versi Siap Pakai (Windows x64)
+Jika Anda ingin menjalankan program secara instan tanpa perlu memasang Python atau browser tambahan:
+👉 **[Download Paket Portable Lengkap (GitHub Releases)](https://github.com/ortseam-88/auto-login-post-instagram/releases/latest)**
+
+*Paket sudah mencakup **Python 3.13 Portable**, **Playwright driver**, dan **Google Chrome Portable** bawaan.*
+Cukup ekstrak berkas ZIP/RAR, lalu klik dua kali **`start-ui.bat`**.
+
+---
+
 ## Menjalankan
 
+### Cara 1: Menggunakan Paket Portable Siap Pakai (Rekomendasi)
 1. Gunakan **Windows 10/11 x64**.
-2. Ekstrak seluruh folder dari ZIP ke lokasi yang dapat ditulis. Jangan
-   menjalankan langsung dari tampilan ZIP atau dari folder sistem.
-3. Klik dua kali **`start-ui.bat`**. Dashboard localhost dibuka di Chrome
-   bawaan paket. Alamat default `http://127.0.0.1:8765/`; port berikutnya
-   dipilih jika port tersebut sedang dipakai.
+2. Unduh paket dari [GitHub Releases](https://github.com/ortseam-88/auto-login-post-instagram/releases/latest) lalu ekstrak seluruh folder ke lokasi yang dapat ditulis (misalnya `D:\instagram-program`).
+3. Klik dua kali **`start-ui.bat`**. Dashboard localhost dibuka di Chrome bawaan paket (`http://127.0.0.1:8765/`).
 4. Tambahkan akun sendiri, impor media, siapkan konten, lalu jalankan.
 
-Python, Tk/Tcl, Playwright beserta driver, dependensi, Chrome dan font UI
-sudah disertakan. Tidak perlu memasang Python/Node/Chrome tambahan. Internet
-hanya diperlukan untuk berinteraksi dengan Instagram. Jika komponen runtime
-hilang, ekstrak ulang paket lengkap; program tidak mengunduh pengganti otomatis.
+### Cara 2: Menjalankan dari Clone Git (Mode Developer)
+Jika Anda meng-clone kode sumber ini langsung dari Git:
+1. Pasang dependensi:
+   ```powershell
+   pip install -r app/requirements.txt
+   playwright install chromium
+   ```
+2. Jalankan launcher:
+   ```powershell
+   .\start-ui.bat
+   # atau
+   python start_ui.py
+   ```
+   *Program akan otomatis mendeteksi Google Chrome yang terpasang di sistem Windows Anda (`C:\Program Files\Google\Chrome\Application\chrome.exe`). Anda juga dapat menentukan lokasi Chrome secara spesifik melalui environment variable `CHROME_PATH`.*
 
-Untuk server tanpa membuka dashboard:
-
+Untuk server tanpa membuka dashboard browser:
 ```powershell
 .\start-ui.bat --no-browser
 ```
 
 Setelah memperbarui kode, hentikan run aktif dan tutup server lama sebelum
 membuka ulang launcher. Refresh halaman saja tidak memuat ulang backend Python.
-
 ## Alur penggunaan
 
 ### Akun

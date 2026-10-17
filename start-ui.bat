@@ -1,33 +1,41 @@
 @echo off
 rem create by Ortseam
 setlocal DisableDelayedExpansion
-set "CHROME_PATH="
 set "IG_SESSION_DIR="
 set "PLAYWRIGHT_NODEJS_PATH="
 
 pushd "%~dp0"
 if errorlevel 1 goto folder_tidak_dapat_dibuka
-if not exist "runtime\python\python.exe" goto runtime_tidak_ditemukan
-if not exist "app\chrome-portable\chrome-win64\chrome.exe" goto chrome_tidak_ditemukan
 
-"runtime\python\python.exe" -B -X utf8 "start_ui.py" %*
-set "EXIT_CODE=%ERRORLEVEL%"
-goto selesai
+rem 1. Gunakan Python bawaan paket jika tersedia
+if exist "runtime\python\python.exe" (
+    "runtime\python\python.exe" -B -X utf8 "start_ui.py" %*
+    set "EXIT_CODE=%ERRORLEVEL%"
+    goto selesai
+)
 
-:runtime_tidak_ditemukan
-echo Runtime Python bawaan tidak ditemukan.
-echo Pulihkan seluruh folder "runtime\python" dari ZIP program.
-echo Ekstrak paket lengkap; Python sistem tidak dipakai sebagai pengganti.
+rem 2. Jika clone dari Git, coba gunakan Python sistem
+where python >nul 2>&1
+if not errorlevel 1 (
+    python -B -X utf8 "start_ui.py" %*
+    set "EXIT_CODE=%ERRORLEVEL%"
+    goto selesai
+)
+
+rem 3. Jika tidak ada Python sama sekali
+echo =====================================================================
+echo Runtime Python tidak ditemukan di PC Anda.
+echo.
+echo Pilihan solusi:
+echo 1. Unduh paket portable lengkap siap pakai (termasuk Python & Chrome):
+echo    https://github.com/ortseam-88/auto-login-post-instagram/releases
+echo.
+echo 2. Atau pasang Python 3.10+ di Windows dan jalankan:
+echo    pip install -r app/requirements.txt
+echo    python start_ui.py
+echo =====================================================================
 set "EXIT_CODE=2"
 goto selesai
-
-:chrome_tidak_ditemukan
-echo Chrome portable bawaan tidak ditemukan.
-echo Pulihkan seluruh folder "app\chrome-portable\chrome-win64" dari ZIP program.
-echo Jangan hanya menyalin chrome.exe atau menggantinya dengan Chrome sistem.
-set "EXIT_CODE=2"
-goto selesai
-
 :selesai
 popd
 goto keluar

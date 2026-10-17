@@ -52,13 +52,31 @@ def resolve_path(value: str | Path) -> Path:
 
 def chrome_path() -> Path:
     value = os.environ.get("CHROME_PATH", "").strip().strip('"')
-    path = resolve_path(value) if value else BASE_DIR / "chrome-portable" / "chrome-win64" / "chrome.exe"
-    if not path.is_file():
-        raise ValueError(
-            "Chrome portable tidak ditemukan; pulihkan folder "
-            "app/chrome-portable/chrome-win64 lengkap dari ZIP program."
-        )
-    return path
+    if value:
+        explicit = resolve_path(value)
+        if explicit.is_file():
+            return explicit
+        raise ValueError(f"CHROME_PATH disetel ke '{value}' namun berkas tidak ditemukan.")
+
+    portable = BASE_DIR / "chrome-portable" / "chrome-win64" / "chrome.exe"
+    if portable.is_file():
+        return portable
+
+    # Fallback ke Google Chrome standar pada Windows jika folder portable tidak ada
+    candidates = [
+        Path(os.environ.get("PROGRAMFILES", r"C:\Program Files")) / "Google" / "Chrome" / "Application" / "chrome.exe",
+        Path(os.environ.get("PROGRAMFILES(X86)", r"C:\Program Files (x86)")) / "Google" / "Chrome" / "Application" / "chrome.exe",
+        Path(os.environ.get("LOCALAPPDATA", "")) / "Google" / "Chrome" / "Application" / "chrome.exe",
+    ]
+    for candidate in candidates:
+        if candidate.is_file():
+            return candidate
+
+    raise ValueError(
+        "Chrome tidak ditemukan. Silakan pasang Google Chrome, setel environment "
+        "variable CHROME_PATH, atau unduh paket portable lengkap dari GitHub Releases: "
+        "https://github.com/ortseam-88/auto-login-post-instagram/releases"
+    )
 
 
 def session_root() -> Path:
