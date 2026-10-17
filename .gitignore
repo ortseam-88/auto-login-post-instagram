@@ -1,0 +1,44 @@
+# Bytecode & Caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+/app/.venv/
+
+# Environment Variables
+.env
+.env.*
+
+# Large binary runtimes (distributed via releases, not in git repository)
+/runtime/*
+!/runtime/bundle-info.json
+/app/chrome-portable/
+
+# Credentials & Media
+/input/akun.txt
+/input/media/*
+!/input/media/.gitkeep
+# Runtime State & Outputs
+/sessions/*
+!/sessions/.gitkeep
+/logs/*
+!/logs/.gitkeep
+/output/*
+!/output/.gitkeep
+/archives/media-dihapus/*
+!/archives/media-dihapus/.gitkeep
+/evidence/*
+!/evidence/.gitkeep
+
+# Temporary & Lock Files
+*.lock
+*.tmp
+*.log

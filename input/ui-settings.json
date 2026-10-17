@@ -1,0 +1,6 @@
+{
+  "mode": "login",
+  "workers": 5,
+  "manual_timeout": 300.0,
+  "headless": false
+}

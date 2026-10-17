@@ -1,0 +1,59 @@
+{
+  "platform": "Windows 10/11 x64",
+  "python": {
+    "version": "3.13.15",
+    "source": "https://www.python.org/ftp/python/3.13.15/python-3.13.15-amd64.zip",
+    "sha256": "6479223746cdfb79d25865110d6f524ac98de081324e119af1dc3ae36bddc7a5",
+    "manifest_url": "https://www.python.org/ftp/python/3.13.15/windows-3.13.15.json"
+  },
+  "packages": {
+    "greenlet": "3.5.6",
+    "markdown-it-py": "4.2.0",
+    "mdurl": "0.1.2",
+    "pip": "26.2.1",
+    "playwright": "1.62.0",
+    "pyee": "13.0.1",
+    "Pygments": "2.21.0",
+    "rich": "14.3.4",
+    "typing_extensions": "4.16.0"
+  },
+  "wheels": {
+    "greenlet-3.5.6-cp313-cp313-win_amd64.whl": "5b602b4201b965a8354d74e232364a66ff243dd142e350d035f46169bb36e13d",
+    "markdown_it_py-4.2.0-py3-none-any.whl": "9f7ebbcd14fe59494226453aed97c1070d83f8d24b6fc3a3bcf9a38092641c4a",
+    "mdurl-0.1.2-py3-none-any.whl": "84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8",
+    "playwright-1.62.0-py3-none-win_amd64.whl": "92c0d98ed04eb35af557b709875edba415b1f548bdb22ddb5bb3e1e6c835c2f1",
+    "pyee-13.0.1-py3-none-any.whl": "af2f8fede4171ef667dfded53f96e2ed0d6e6bd7ee3bb46437f77e3b57689228",
+    "pygments-2.21.0-py3-none-any.whl": "2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9",
+    "rich-14.3.4-py3-none-any.whl": "07e7adb4690f68864777b1450859253bed81a99a31ac321ac1817b2313558952",
+    "typing_extensions-4.16.0-py3-none-any.whl": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+  },
+  "module_isolation": "python313._pth; no registry, user site-packages or PYTHONPATH; no import site",
+  "chrome": "app/chrome-portable/chrome-win64/chrome.exe",
+  "signatures": [
+    {
+      "name": "python.exe",
+      "status": "Valid",
+      "signer": "CN=Python Software Foundation, O=Python Software Foundation, L=Beaverton, S=Oregon, C=US"
+    },
+    {
+      "name": "python313.dll",
+      "status": "Valid",
+      "signer": "CN=Python Software Foundation, O=Python Software Foundation, L=Beaverton, S=Oregon, C=US"
+    },
+    {
+      "name": "chrome.exe",
+      "status": "NotSigned",
+      "signer": null
+    },
+    {
+      "name": "node.exe",
+      "status": "Valid",
+      "signer": "CN=OpenJS Foundation, O=OpenJS Foundation, L=San Francisco, S=California, C=US"
+    }
+  ],
+  "omitted": {
+    "Scripts": "pip-generated absolute-path EXE entrypoints; application calls bundled python.exe directly",
+    "bytecode_caches": "removed after packaging; launcher uses -B"
+  },
+  "chrome_version": "135.0.7049.114"
+}

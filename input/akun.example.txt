@@ -1,0 +1,7 @@
+# Format kredensial akun Instagram: identifier|password (satu akun per baris)
+# identifier dapat berupa username, alamat email, atau nomor HP
+# Baris berawalan tanda # dan baris kosong akan diabaikan
+# 
+# Salin file ini menjadi input/akun.txt atau gunakan tombol "Tambah akun" di UI
+# Contoh:
+# akun_instagram_anda|password_rahasia_anda

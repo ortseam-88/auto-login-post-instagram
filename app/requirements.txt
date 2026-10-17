@@ -1,0 +1,9 @@
+# Versi paket Windows x64 di runtime/python; tidak perlu pip saat memakai program.
+playwright==1.62.0
+rich==14.3.4
+greenlet==3.5.6
+pyee==13.0.1
+markdown-it-py==4.2.0
+mdurl==0.1.2
+Pygments==2.21.0
+typing_extensions==4.16.0

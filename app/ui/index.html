@@ -1,0 +1,363 @@
+<!doctype html>
+<!-- create by Ortseam -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Instagram Program</title>
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<nav class="rail" aria-label="Menu utama">
+  <button type="button" class="rail-fab" id="rail-run" aria-label="Start" title="Start"><span class="material-symbols-outlined">play_arrow</span></button>
+  <a class="rail-item" href="#/beranda" data-route="beranda"><span class="rail-indicator"><span class="material-symbols-outlined">home</span></span><span class="rail-label">Beranda</span></a>
+  <a class="rail-item" href="#/akun" data-route="akun"><span class="rail-indicator"><span class="material-symbols-outlined">manage_accounts</span></span><span class="rail-label">Akun</span></a>
+  <a class="rail-item" href="#/media" data-route="media"><span class="rail-indicator"><span class="material-symbols-outlined">perm_media</span></span><span class="rail-label">Media</span></a>
+  <a class="rail-item" href="#/konten" data-route="konten"><span class="rail-indicator"><span class="material-symbols-outlined">list_alt</span><span class="rail-badge small hidden" id="rail-badge-jobs"></span></span><span class="rail-label">Konten</span></a>
+  <a class="rail-item" href="#/jalankan" data-route="jalankan"><span class="rail-indicator"><span class="material-symbols-outlined">play_circle</span><span class="rail-badge hidden" id="rail-badge-results"></span></span><span class="rail-label">Jalankan</span></a>
+  <a class="rail-item" href="#/riwayat" data-route="riwayat"><span class="rail-indicator"><span class="material-symbols-outlined">history</span></span><span class="rail-label">Riwayat</span></a>
+  <a class="rail-item" href="#/sistem" data-route="sistem"><span class="rail-indicator"><span class="material-symbols-outlined">memory</span></span><span class="rail-label">Sistem</span></a>
+</nav>
+
+<div class="app">
+  <header class="top-app-bar">
+    <span class="material-symbols-outlined app-icon" aria-hidden="true">photo_camera</span>
+    <h1 class="title-large" id="page-title">Instagram Program</h1>
+    <div class="top-app-bar-trailing">
+      <button type="button" id="run-badge" class="status-chip idle" title="Lihat status run"><span class="material-symbols-outlined">radio_button_unchecked</span><span class="status-chip-label">Siap</span></button>
+    </div>
+  </header>
+
+  <main id="views">
+    <section class="view" data-route="beranda" data-title="Instagram Program">
+      <div class="stats" aria-label="Ringkasan">
+        <a class="stat tone-primary" href="#/akun"><span class="material-symbols-outlined">group</span><span class="stat-value headline-large" id="stat-accounts">0</span><span class="stat-label label-large">Akun</span><span class="stat-sub body-small" id="stat-accounts-sub">—</span></a>
+        <a class="stat tone-secondary" href="#/media"><span class="material-symbols-outlined">photo_library</span><span class="stat-value headline-large" id="stat-media">0</span><span class="stat-label label-large">Media</span><span class="stat-sub body-small" id="stat-media-sub">—</span></a>
+        <a class="stat tone-tertiary" href="#/konten"><span class="material-symbols-outlined">list_alt</span><span class="stat-value headline-large" id="stat-jobs">0</span><span class="stat-label label-large">Konten</span><span class="stat-sub body-small" id="stat-jobs-sub">—</span></a>
+      </div>
+
+      <section class="card elevated panel span-12 guide" id="guide-card" aria-label="Langkah">
+        <ol class="steps">
+          <li><button type="button" class="step" data-step="accounts" data-route="akun"><span class="step-num">1</span><span class="step-text"><span class="title-small">Akun</span><span class="body-small supporting step-hint">Tambah akun Instagram</span></span></button></li>
+          <li><button type="button" class="step" data-step="media" data-route="media"><span class="step-num">2</span><span class="step-text"><span class="title-small">Media</span><span class="body-small supporting step-hint">Pilih foto/video</span></span></button></li>
+          <li><button type="button" class="step" data-step="jobs" data-route="konten"><span class="step-num">3</span><span class="step-text"><span class="title-small">Konten</span><span class="body-small supporting step-hint">Siapkan media dan caption</span></span></button></li>
+          <li><button type="button" class="step" data-step="run" data-route="jalankan"><span class="step-num">4</span><span class="step-text"><span class="title-small">Jalankan</span><span class="body-small supporting step-hint">Pilih konten dan akun tujuan</span></span></button></li>
+        </ol>
+        <div class="guide-next">
+          <span class="material-symbols-outlined" id="guide-icon">arrow_forward</span>
+          <span class="body-medium" id="guide-text">Memuat…</span>
+          <button type="button" class="btn filled hidden" id="guide-action"></button>
+        </div>
+        <div class="progress hidden" id="run-progress"><div class="progress-bar" id="run-progress-bar"></div></div>
+        <p class="supporting-text hidden" id="run-progress-text"></p>
+      </section>
+    </section>
+
+    <section class="view" data-route="akun" data-title="Akun">
+      <section class="card elevated panel span-7" id="accounts-card">
+        <header class="panel-head">
+          <span class="panel-icon tone-primary"><span class="material-symbols-outlined">manage_accounts</span></span>
+          <div class="panel-title"><h2 class="title-medium">Daftar akun</h2><p class="body-small supporting">Akun tujuan dipilih saat menjalankan posting. Menghapus akun juga menghapus session browsernya, bukan konten atau riwayat posting.</p></div>
+        </header>
+        <div class="panel-body">
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Daftar akun; geser untuk melihat semua kolom">
+          <table class="table" id="account-table">
+            <thead><tr><th>Identifier</th><th>Session lokal</th><th class="actions"></th></tr></thead>
+            <tbody></tbody>
+          </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="card elevated panel span-5" id="account-add-card">
+        <header class="panel-head">
+          <span class="panel-icon tone-secondary"><span class="material-symbols-outlined">person_add</span></span>
+          <div class="panel-title"><h2 class="title-medium">Tambah akun</h2><p class="body-small supporting">Password disimpan di file akun lokal dan tidak ditampilkan lagi.</p></div>
+        </header>
+        <div class="panel-body">
+          <form id="account-form" class="form-row stack">
+            <div class="field"><input id="account-identifier" class="control" placeholder=" " autocomplete="off" required><label for="account-identifier">Username / email / nomor HP</label></div>
+            <div class="field password">
+              <input id="account-password" class="control" type="password" placeholder=" " autocomplete="new-password" autocapitalize="off" spellcheck="false" required>
+              <label for="account-password">Password</label>
+              <button id="account-password-toggle" type="button" class="icon-btn" aria-controls="account-password" aria-label="Tampilkan password" title="Tampilkan password"><span class="material-symbols-outlined" aria-hidden="true">visibility</span></button>
+            </div>
+            <div class="form-row-end"><button type="submit" class="btn filled"><span class="material-symbols-outlined">person_add</span>Tambah akun</button></div>
+          </form>
+          <p id="accounts-error" class="supporting-text error-text"></p>
+          <details class="expander" id="bulk-accounts">
+            <summary><span class="material-symbols-outlined leading">group_add</span><span class="title-small">Impor banyak akun</span><span class="body-small supporting">tempel identifier|password per baris</span><span class="material-symbols-outlined chevron">expand_more</span></summary>
+            <div class="expander-body">
+              <div class="field"><textarea id="bulk-accounts-text" class="control" rows="6" placeholder=" " spellcheck="false"></textarea><label for="bulk-accounts-text">akun1|password1 ⏎ akun2|password2 …</label></div>
+              <p class="supporting-text">Baris kosong dan baris berawalan # diabaikan. Akun yang sudah ada dilewati; satu baris salah membatalkan seluruh impor.</p>
+              <div class="form-row-end"><button id="bulk-accounts-submit" type="button" class="btn tonal"><span class="material-symbols-outlined">group_add</span>Impor semua</button></div>
+            </div>
+          </details>
+        </div>
+      </section>
+    </section>
+
+    <section class="view" data-route="media" data-title="Media">
+      <section class="card elevated panel span-12" id="media-card">
+        <header class="panel-head">
+          <span class="panel-icon tone-secondary"><span class="material-symbols-outlined">perm_media</span></span>
+          <div class="panel-title"><h2 class="title-medium">Media</h2><p class="body-small supporting">File disalin ke folder program. Media yang dihapus dipindahkan ke arsip, bukan dibuang.</p></div>
+        </header>
+        <div class="panel-body">
+          <div class="form-row">
+            <button id="pick-media" type="button" class="btn filled"><span class="material-symbols-outlined">folder_open</span>Pilih file dari komputer</button>
+          </div>
+          <p id="media-status" class="supporting-text"></p>
+          <details class="expander" id="media-path-expander">
+            <summary><span class="material-symbols-outlined leading">description</span><span class="title-small">Tempel path file</span><span class="body-small supporting">jika dialog file tidak muncul</span><span class="material-symbols-outlined chevron">expand_more</span></summary>
+            <div class="expander-body form-row">
+              <div class="field grow"><input id="media-path" class="control" placeholder=" " autocomplete="off"><label for="media-path">Path file foto/video</label></div>
+              <button id="import-media" type="button" class="btn outlined"><span class="material-symbols-outlined">upload_file</span>Import</button>
+            </div>
+          </details>
+          <div id="media-grid" class="media-grid"></div>
+        </div>
+      </section>
+    </section>
+
+    <section class="view" data-route="konten" data-title="Konten">
+      <section class="card elevated panel span-12" id="jobs-card">
+        <header class="panel-head">
+          <span class="panel-icon tone-tertiary"><span class="material-symbols-outlined">list_alt</span></span>
+          <div class="panel-title"><h2 class="title-medium">Konten</h2><p class="body-small supporting">Siapkan media, caption, dan opsi posting di sini. Pilih akun tujuan nanti di Jalankan.</p></div>
+          <span id="jobs-dirty" class="chip warn hidden"><span class="material-symbols-outlined">edit</span>Belum disimpan</span>
+        </header>
+        <div class="panel-body">
+          <p id="manifest-error" class="supporting-text error-text hidden" role="alert"></p>
+          <div class="form-row list-toolbar">
+            <button id="new-job" type="button" class="btn filled"><span class="material-symbols-outlined">add</span>Konten baru</button>
+            <button id="save-jobs" type="button" class="btn tonal"><span class="material-symbols-outlined">save</span>Simpan</button>
+            <div class="field grow"><input id="job-filter" class="control" placeholder=" " autocomplete="off"><label for="job-filter">Cari konten</label></div>
+            <span id="job-filter-count" class="supporting-text"></span>
+            <button id="fold-toggle" type="button" class="btn text"><span class="material-symbols-outlined">unfold_less</span><span class="btn-label">Lipat semua</span></button>
+          </div>
+          <p id="jobs-status" class="supporting-text" role="status"></p>
+          <div id="job-list" class="job-list"></div>
+        </div>
+      </section>
+    </section>
+
+    <section class="view" data-route="jalankan" data-title="Jalankan">
+      <section class="card elevated panel span-12" id="settings-card">
+        <header class="panel-head">
+          <span class="panel-icon tone-primary"><span class="material-symbols-outlined">tune</span></span>
+          <div class="panel-title"><h2 class="title-medium">Jalankan</h2><p class="body-small supporting">Pilih konten, centang akun tujuan, lalu mulai posting.</p></div>
+        </header>
+        <div class="panel-body">
+          <p id="run-manifest-error" class="supporting-text error-text hidden" role="alert"></p>
+          <p id="settings-file-error" class="supporting-text error-text hidden" role="alert"></p>
+          <div class="mode-cards" role="radiogroup" aria-label="Mode">
+            <label class="mode-card"><input type="radio" name="mode" value="login"><span class="material-symbols-outlined">login</span><span class="mode-title title-small">Login saja</span><span class="body-small supporting">Buka dan simpan session tiap akun. Tidak memposting apa pun.</span></label>
+            <label class="mode-card danger"><input type="radio" name="mode" value="publish"><span class="material-symbols-outlined">rocket_launch</span><span class="mode-title title-small">Posting sungguhan</span><span class="body-small supporting">Memposting konten pilihan ke Instagram. Konfirmasi PUBLISH diminta saat Start.</span></label>
+          </div>
+          <select id="setting-mode" class="hidden" aria-hidden="true"><option value="login">login</option><option value="publish">publish</option></select>
+          <div class="run-selection-grid">
+          <div id="run-content" class="run-content hidden">
+            <div class="run-content-head">
+              <h3 class="label-large section-label"><span class="material-symbols-outlined">checklist</span>Pilih konten</h3>
+              <div class="form-row tight">
+                <button type="button" class="btn text" id="run-content-all"><span class="material-symbols-outlined">done_all</span>Pilih semua</button>
+                <button type="button" class="btn text" id="run-content-none"><span class="material-symbols-outlined">close</span>Batal pilih</button>
+              </div>
+            </div>
+            <div id="run-content-list" class="run-content-list"></div>
+            <p id="run-content-summary" class="supporting-text"></p>
+          </div>
+            <div id="run-accounts" class="run-content">
+              <div class="run-content-head">
+                <h3 class="label-large section-label"><span class="material-symbols-outlined">group</span>Pilih akun tujuan</h3>
+                <div class="form-row tight">
+                  <button type="button" class="btn text" id="run-accounts-all"><span class="material-symbols-outlined">done_all</span>Pilih semua akun</button>
+                  <button type="button" class="btn text" id="run-accounts-none"><span class="material-symbols-outlined">close</span>Batal pilih</button>
+                </div>
+              </div>
+              <div id="run-accounts-list" class="run-content-list"></div>
+              <p id="run-accounts-summary" class="supporting-text"></p>
+            </div>
+          </div>
+          <div class="run-plan">
+            <p id="run-plan-summary" class="body-medium" role="status" aria-live="polite">Pilih konten dan akun tujuan.</p>
+            <label id="run-repost-field" class="switch block hidden"><input id="run-repost" type="checkbox"><span class="switch-track"><span class="switch-thumb"></span></span><span class="switch-label label-large">Posting ulang yang sudah berhasil</span><span class="switch-supporting body-small">Hanya untuk hasil yang sudah terkonfirmasi. Riwayat lama tetap disimpan.</span></label>
+          </div>
+          <details class="expander" id="advanced-settings">
+            <summary><span class="material-symbols-outlined leading">tune</span><span class="title-small">Pengaturan lanjutan</span><span class="body-small supporting" id="advanced-summary"></span><span class="material-symbols-outlined chevron">expand_more</span></summary>
+            <div class="expander-body">
+              <div class="grid-2">
+                <div class="field"><input id="setting-workers" class="control" type="number" min="1" max="10" step="1" value="5" placeholder=" "><label for="setting-workers">Akun paralel (1–10)</label></div>
+                <div class="field"><input id="setting-timeout" class="control" type="number" min="0" max="86400" step="1" value="300" placeholder=" "><label for="setting-timeout">Tunggu verifikasi (dtk)</label></div>
+              </div>
+              <p class="supporting-text">Akun paralel = jumlah jendela browser yang berjalan bersamaan. Tunggu verifikasi = batas waktu menyelesaikan 2FA/checkpoint di jendela; 0 = tidak menunggu.</p>
+              <label class="switch block"><input id="setting-headless" type="checkbox"><span class="switch-track"><span class="switch-thumb"></span></span><span class="switch-label label-large">Tanpa jendela (headless)</span><span class="switch-supporting body-small">Lebih ringan, tetapi verifikasi manual tidak bisa dilakukan.</span></label>
+            </div>
+          </details>
+          <div class="form-row actions">
+            <button id="start-run" type="button" class="btn filled"><span class="material-symbols-outlined">play_arrow</span><span class="btn-label">Start</span></button>
+            <button id="stop-run" type="button" class="btn outlined error" disabled><span class="material-symbols-outlined">stop</span>Stop</button>
+          </div>
+          <p id="settings-error" class="supporting-text"></p>
+        </div>
+      </section>
+
+      <section class="card elevated panel span-12" id="run-card">
+        <header class="panel-head">
+          <span class="panel-icon tone-secondary"><span class="material-symbols-outlined">monitoring</span></span>
+          <div class="panel-title"><h2 class="title-medium">Status &amp; hasil</h2><p class="body-small supporting run-meta" id="run-summary" role="status" aria-live="polite">Belum ada run di sesi ini.</p></div>
+        </header>
+        <div class="panel-body">
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Hasil per akun; geser untuk melihat semua kolom">
+          <table id="results-table" class="table">
+            <thead><tr><th>Akun</th><th>Konten</th><th>Hasil</th><th>Keterangan</th><th>Waktu</th><th class="actions"></th></tr></thead>
+            <tbody></tbody>
+          </table>
+          </div>
+          <h3 class="title-small section-heading"><span class="material-symbols-outlined">terminal</span>Log</h3>
+          <pre id="run-log" class="log"></pre>
+        </div>
+      </section>
+    </section>
+
+    <section class="view" data-route="riwayat" data-title="Riwayat">
+      <section class="card elevated panel span-12" id="history-card">
+        <header class="panel-head">
+          <span class="panel-icon tone-tertiary"><span class="material-symbols-outlined">history</span></span>
+          <div class="panel-title"><h2 class="title-medium">Riwayat run</h2><p class="body-small supporting">100 run terakhir dari UI ini.</p></div>
+        </header>
+        <div class="panel-body">
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Riwayat run; geser untuk melihat semua kolom">
+          <table id="history-table" class="table">
+            <thead><tr><th>Mulai</th><th>Mode</th><th>Akun</th><th>Hasil</th><th class="actions"></th></tr></thead>
+            <tbody></tbody>
+          </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="card elevated panel span-12" id="ledger-card">
+        <header class="panel-head">
+          <span class="panel-icon tone-error"><span class="material-symbols-outlined">receipt_long</span></span>
+          <div class="panel-title"><h2 class="title-medium">Ledger publikasi</h2><p class="body-small supporting">Riwayat percobaan posting per akun. Posting ulang harus dipilih sengaja; hasil yang belum pasti perlu diperiksa dahulu.</p></div>
+        </header>
+        <div class="panel-body">
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Ledger publikasi; geser untuk melihat semua kolom">
+          <table id="ledger-table" class="table">
+            <thead><tr><th>Konten</th><th>Akun</th><th>Status</th><th>Tautan</th><th>Detail</th><th>Diperbarui</th></tr></thead>
+            <tbody></tbody>
+          </table>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="view" data-route="sistem" data-title="Sistem">
+      <section class="card elevated panel span-12" id="env-card">
+        <header class="panel-head">
+          <span class="panel-icon tone-neutral"><span class="material-symbols-outlined">memory</span></span>
+          <div class="panel-title"><h2 class="title-medium">Sistem &amp; lokasi data</h2><p class="body-small supporting">Runtime yang dipakai dan lokasi semua file program.</p></div>
+        </header>
+        <div class="panel-body">
+          <div id="env-list" class="kv"></div>
+        </div>
+      </section>
+    </section>
+  </main>
+</div>
+
+<div id="snackbar" class="snackbar hidden" role="status"><span class="body-medium" id="snackbar-text"></span></div>
+
+<dialog id="dialog" class="dialog">
+  <form method="dialog" class="dialog-form">
+    <span class="material-symbols-outlined dialog-icon hidden" id="dialog-icon">info</span>
+    <h2 class="headline-small" id="dialog-title"></h2>
+    <p class="body-medium supporting" id="dialog-text"></p>
+    <div class="field hidden" id="dialog-field"><input id="dialog-input" class="control" placeholder=" " autocomplete="off"><label for="dialog-input" id="dialog-input-label"></label></div>
+    <div class="hidden" id="dialog-slot"></div>
+    <div class="dialog-actions">
+      <button type="button" class="btn text" id="dialog-cancel">Batal</button>
+      <button type="button" class="btn text" id="dialog-confirm">OK</button>
+    </div>
+  </form>
+</dialog>
+
+<template id="job-template">
+  <article class="card outlined job">
+    <header class="job-head">
+      <span class="job-thumb"><span class="material-symbols-outlined"></span></span>
+      <div class="job-heading">
+        <strong class="title-medium job-title"></strong>
+        <span class="body-small supporting job-subtitle"></span>
+      </div>
+      <div class="job-actions">
+        <button type="button" class="icon-btn job-up" title="Naik" aria-label="Naik"><span class="material-symbols-outlined">arrow_upward</span></button>
+        <button type="button" class="icon-btn job-down" title="Turun" aria-label="Turun"><span class="material-symbols-outlined">arrow_downward</span></button>
+        <button type="button" class="btn text job-duplicate"><span class="material-symbols-outlined">content_copy</span>Duplikat</button>
+        <button type="button" class="btn text error job-remove"><span class="material-symbols-outlined">delete</span>Hapus</button>
+        <button type="button" class="icon-btn job-toggle" title="Lipat/buka" aria-label="Lipat/buka"><span class="material-symbols-outlined">expand_more</span></button>
+      </div>
+    </header>
+    <div class="job-body">
+      <div class="job-media">
+        <div class="job-preview"></div>
+        <div class="job-strip hidden"></div>
+        <div class="job-media-actions"></div>
+        <span class="job-media-name"></span>
+        <h4 class="label-large section-label"><span class="material-symbols-outlined">crop</span>Crop</h4>
+        <div class="crop-chips"></div>
+        <p class="job-preview-note">Pratinjau rasio saja; filter dan zoom diterapkan saat proses posting.</p>
+      </div>
+      <div class="job-form">
+        <div class="job-top">
+          <div class="field"><input class="control f-job-id" placeholder=" " required><label>Nama konten</label></div>
+          <div class="field select">
+            <select class="control f-kind">
+              <option value="photo">Foto (1 gambar)</option>
+              <option value="carousel">Carousel (2–20 media)</option>
+              <option value="reel">Reel (1 video)</option>
+            </select>
+            <label>Jenis</label><span class="material-symbols-outlined trailing">arrow_drop_down</span>
+          </div>
+        </div>
+        <div class="field"><textarea class="control f-caption" rows="5" placeholder=" "></textarea><label>Caption</label></div>
+        <div class="caption-meta"></div>
+
+        <details class="expander">
+          <summary><span class="material-symbols-outlined leading">tune</span><span class="title-small">Opsi lanjutan</span><span class="body-small supporting adv-hint"></span><span class="chip info adv-count hidden"></span><span class="material-symbols-outlined chevron">expand_more</span></summary>
+          <div class="expander-body">
+            <div class="grid-3">
+              <div class="field"><input class="control f-location" placeholder=" "><label>Lokasi</label></div>
+              <div class="field"><input class="control f-collaborators" placeholder=" "><label>Kolaborator (pisahkan koma)</label></div>
+              <div class="field reel-only"><input class="control f-reel-tags" placeholder=" "><label>Tag orang (pisahkan koma)</label></div>
+              <div class="field select"><select class="control f-ai"><option value="">Biarkan</option><option value="true">Aktif</option><option value="false">Nonaktif</option></select><label>Label AI</label><span class="material-symbols-outlined trailing">arrow_drop_down</span></div>
+              <div class="field select"><select class="control f-comments"><option value="">Biarkan</option><option value="true">Diizinkan</option><option value="false">Dimatikan</option></select><label>Komentar</label><span class="material-symbols-outlined trailing">arrow_drop_down</span></div>
+              <div class="field select"><select class="control f-hide-counts"><option value="">Biarkan</option><option value="true">Ya</option><option value="false">Tidak</option></select><label>Sembunyikan like/view</label><span class="material-symbols-outlined trailing">arrow_drop_down</span></div>
+            </div>
+            <div class="reel-only">
+              <h4 class="label-large section-label"><span class="material-symbols-outlined">movie_edit</span>Cover, trim, audio</h4>
+              <div class="grid-3">
+                <div class="field select"><select class="control f-cover"><option value="">Tidak ada</option></select><label>File cover</label><span class="material-symbols-outlined trailing">arrow_drop_down</span></div>
+                <div class="field"><input class="control f-cover-time" type="number" min="0" step="0.1" placeholder=" "><label>Detik cover (alternatif)</label></div>
+                <div class="field select"><select class="control f-audio"><option value="">Biarkan</option><option value="true">Aktif</option><option value="false">Nonaktif</option></select><label>Audio asli</label><span class="material-symbols-outlined trailing">arrow_drop_down</span></div>
+                <div class="field"><input class="control f-trim-start" type="number" min="0" step="0.1" placeholder=" "><label>Trim mulai (detik)</label></div>
+                <div class="field"><input class="control f-trim-end" type="number" min="0" step="0.1" placeholder=" "><label>Trim akhir (detik)</label></div>
+              </div>
+            </div>
+            <div class="photo-only">
+              <h4 class="label-large section-label"><span class="material-symbols-outlined">photo_filter</span>Per foto: alt text, tag orang, zoom, filter, penyesuaian</h4>
+              <div class="per-media"></div>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </article>
+</template>
+
+
+<script src="/app.js"></script>
+</body>
+</html>
